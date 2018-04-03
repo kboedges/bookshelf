@@ -1,3 +1,6 @@
+/* Using update(book.id, bookShelf) and the BooksAPI, change the bookshelf */
+/* https://reactjs.org/docs/forms.html#why-select-value */
+
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
@@ -55,7 +58,6 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-              <ListBooks books={this.state.books} bookShelf="none"/>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
