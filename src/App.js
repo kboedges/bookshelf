@@ -13,18 +13,35 @@ import './App.css'
 import ListBooks from './ListBooks';
 
 class BooksApp extends React.Component {
-  state = {
-    books: [],
-    bookShelf: "",
-    showSearchPage: false
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+      bookShelf: "",
+      showSearchPage: false
+    };
+
+    this.moveBookToShelf = this.moveBookToShelf.bind(this);
   }
+
+  // state = {
+  //   books: [],
+  //   bookShelf: "",
+  //   showSearchPage: false
+  // }
 
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
-      console.log(books);
     })
   }
+
+  moveBookToShelf(event, book) { 
+    BooksAPI.update(book, event.target.value);
+    console.log(book, event.target.value);
+    console.log(this.state.books);
+}
 
   render() {
     return (
@@ -63,6 +80,7 @@ class BooksApp extends React.Component {
                   <ListBooks 
                     books={this.state.books} 
                     bookShelf="currentlyReading"
+                    changeShelf={this.moveBookToShelf}
                   />
                   </div>
                 </div>
@@ -72,6 +90,7 @@ class BooksApp extends React.Component {
                   <ListBooks 
                     books={this.state.books} 
                     bookShelf="wantToRead"
+                    changeShelf={this.moveBookToShelf}
                   />
                   </div>
                 </div>
@@ -81,6 +100,7 @@ class BooksApp extends React.Component {
                   <ListBooks 
                     books={this.state.books} 
                     bookShelf="read"
+                    changeShelf={this.moveBookToShelf}
                   />
                   </div>
                 </div>

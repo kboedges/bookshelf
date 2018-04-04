@@ -1,33 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends Component {
-
-    constructor(props){
-        super(props);
-        this.state = {value: this.bookShelf};
-        this.changeShelf = this.changeShelf.bind(this);
-    }
 
     static PropTypes = {
         books: PropTypes.array.isRequired,
         bookShelf: PropTypes.string.isRequired,
+        changeShelf: PropTypes.func.isRequired
     }
-
-    changeShelf(event) {
-        
-        this.book.id.setState({value: event.target.value});
-        BooksAPI.update(this.book.id, this.bookShelf)
-    }
-
-    // updateShelf = (query) => {
-    //     this.setState({ })
-    // }
 
     render(){
-        const { books, bookShelf } = this.props;
-        // const { query } = this.state;
+        const { books, bookShelf, changeShelf } = this.props;
 
         let showingBooks = books.filter((book) => book.shelf === bookShelf);
 
@@ -39,7 +22,7 @@ class ListBooks extends Component {
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                             <div className="book-shelf-changer">
-                              <select value={this.state.value} onChange={this.changeShelf} /* Will this work? */>
+                              <select defaultValue={book.shelf} onChange={(event) => changeShelf(event, book)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -62,7 +45,8 @@ class ListBooks extends Component {
 
 ListBooks.propTypes = {
     books: PropTypes.array.isRequired,
-    bookShelf: PropTypes.string.isRequired
+    bookShelf: PropTypes.string.isRequired,
+    changeShelf: PropTypes.func.isRequired
 }
 
 export default ListBooks
