@@ -10,7 +10,6 @@ class ListBooks extends Component {
 
   render(){
     const { books, bookShelf, changeShelf } = this.props;
-
     let showingBooks = books.filter((book) => book.shelf === bookShelf);
 
     return (
@@ -37,9 +36,7 @@ class ListBooks extends Component {
             ))}
         </ol>
     )
-
-}
-
+  }
 }
 
 ListBooks.propTypes = {
