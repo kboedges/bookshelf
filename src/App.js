@@ -9,6 +9,7 @@ pages, as well as provide a good URL they can bookmark and share.
 */
 
 import React from 'react'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import ListBooks from './ListBooks';
@@ -18,11 +19,12 @@ class BooksApp extends React.Component {
 
   constructor(props) {
     super(props);
+    
     this.state = {
       books: [],
       bookShelf: "",
       showSearchPage: false
-    };
+    }
 
     this.moveBookToShelf = this.moveBookToShelf.bind(this);
   }
@@ -35,11 +37,12 @@ class BooksApp extends React.Component {
 
   moveBookToShelf(event, book){ 
     BooksAPI.update(book, event.target.value).then((response) => {
-      console.log(response);
+      // console.log(response);
+      // response returns arrays of book ids, find a better way to do this
       BooksAPI.getAll().then((books) => {
         this.setState({ books })
       })
-      /* response returns arrays of book ids, find a better way to do this */
+      
     })
     // console.log(book, event.target.value);
     // console.log(this.state.books);
