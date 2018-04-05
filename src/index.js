@@ -8,3 +8,16 @@ ReactDOM.render(
     <BrowserRouter><App /></BrowserRouter>, 
     document.getElementById('root')
 );
+
+
+/* 
+
+NOTES:
+
+* Using BooksAPI.search(query).then((results) => {
+    this.setState({ results })
+})
+
+Maybe use <ListBooks /> to display them
+
+*/
