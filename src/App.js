@@ -1,13 +1,3 @@
-/* Check on npm warnings and figure out why the back link doesn't work anymore. Put all of the books html into ListBooks
-use filter to filter by the book shelf for each section and then only use ListBooks once.
-Add <SearchBooks /> props so that search works still
-
-Instead of using this state variable to keep track of which page we're on, 
-use the URL in the browser's address bar. This will ensure that
-users can use the browser's back and forward buttons to navigate between
-pages, as well as provide a good URL they can bookmark and share.
-*/
-
 import React from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -24,7 +14,6 @@ class BooksApp extends React.Component {
     this.state = {
       books: [],
       bookShelf: "",
-      showSearchPage: false
     }
 
     this.moveBookToShelf = this.moveBookToShelf.bind(this);
@@ -52,9 +41,14 @@ class BooksApp extends React.Component {
 render() {
   return (
     <div className="app">
-      {this.state.showSearchPage ? (
+
+      {/* This brings you to the search page */}
+      <Route path="/search" render={() => (
         <SearchBooks />
-      ) : (
+      )}/>
+
+      {/* This brings you to the list of books */}
+      <Route exact path="/" render={() => (
         <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
@@ -63,44 +57,43 @@ render() {
             <div>
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Currently Reading</h2>
-                <div className="bookshelf-books">
-                <ListBooks 
-                  books={this.state.books} 
-                  bookShelf="currentlyReading"
-                  changeShelf={this.moveBookToShelf}
-                />
-                </div>
+                  <div className="bookshelf-books">
+                    <ListBooks 
+                      books={this.state.books} 
+                      bookShelf="currentlyReading"
+                      changeShelf={this.moveBookToShelf}
+                    />
+                  </div>
               </div>
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Want to Read</h2>
-                <div className="bookshelf-books">
-                <ListBooks 
-                  books={this.state.books} 
-                  bookShelf="wantToRead"
-                  changeShelf={this.moveBookToShelf}
-                />
-                </div>
+                  <div className="bookshelf-books">
+                    <ListBooks 
+                      books={this.state.books} 
+                      bookShelf="wantToRead"
+                      changeShelf={this.moveBookToShelf}
+                    />
+                  </div>
               </div>
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Read</h2>
-                <div className="bookshelf-books">
-                <ListBooks 
-                  books={this.state.books} 
-                  bookShelf="read"
-                  changeShelf={this.moveBookToShelf}
-                />
-                </div>
+                  <div className="bookshelf-books">
+                    <ListBooks 
+                      books={this.state.books} 
+                      bookShelf="read"
+                      changeShelf={this.moveBookToShelf}
+                    />
+                  </div>
               </div>
             </div>
           </div>
           <div className="open-search">
-            <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+            <Link to="/search">Add a book</Link>
           </div>
         </div>
-      )}
+      )}/>
     </div>
-  )
-}
+  )}
 }
 
 export default BooksApp
