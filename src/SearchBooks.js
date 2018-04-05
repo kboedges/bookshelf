@@ -6,26 +6,40 @@ you don't find a specific author or title. Every search is limited by search ter
 */
 
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 class SearchBooks extends Component {
 
-    // static PropTypes = {
-    // }
+    static PropTypes = {
+      onSearch: PropTypes.func.isRequired
+    }
 
   render(){
+    const { onSearch } = this.props;
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
             {/* API stuff goes here I think */}
-            <input type="text" placeholder="Search by title or author"/>
+            <input 
+              type="text" 
+              placeholder="Search by title or author"
+              onChange={(event) => onSearch(event)}
+            />
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+          
+
+            
+
+
+
+          </ol>
         </div>
       </div>
     )
@@ -33,7 +47,7 @@ class SearchBooks extends Component {
 }
 
 // SearchBooks.propTypes = {
-    
+//   onSearch: PropTypes.func.isRequired
 // }
 
 export default SearchBooks

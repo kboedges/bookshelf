@@ -10,6 +10,8 @@ class ListBooks extends Component {
 
   render(){
     const { books, bookShelf, changeShelf } = this.props;
+
+    // if (bookShelf === ""){let showingBooks = books;}
     let showingBooks = books.filter((book) => book.shelf === bookShelf);
 
     return (

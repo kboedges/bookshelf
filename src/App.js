@@ -3,8 +3,8 @@ import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import ListBooks from './ListBooks';
 import SearchBooks from './SearchBooks';
+import ListBooks from './ListBooks';
 
 class BooksApp extends React.Component {
 
@@ -17,6 +17,7 @@ class BooksApp extends React.Component {
     }
 
     this.moveBookToShelf = this.moveBookToShelf.bind(this);
+    this.handleSearchQuery = this.handleSearchQuery.bind(this);
   }
 
   componentDidMount(){
@@ -27,18 +28,16 @@ class BooksApp extends React.Component {
 
   moveBookToShelf(event, book){ 
     BooksAPI.update(book, event.target.value).then((response) => {
-      // console.log(response);
-      // response returns arrays of book ids, find a better way to do this
       BooksAPI.getAll().then((books) => {
         this.setState({ books })
       })
     })
-    // console.log(book, event.target.value);
-    // console.log(this.state.books);
+    // console.log(book, event.target.value, this.state.books);
   }
 
-  searchBooks(query){
-    BooksAPI.search(query).then((results) => {
+  handleSearchQuery(event){
+    // console.log(event.target.value);
+    BooksAPI.search(event.target.value).then((results) => {
       console.log(results);
     })
   }
@@ -49,7 +48,9 @@ render() {
 
       {/* This brings you to the search page */}
       <Route path="/search" render={() => (
-        <SearchBooks />
+        <SearchBooks 
+          onSearch={this.handleSearchQuery}
+        />
       )}/>
 
       {/* This brings you to the list of books */}
