@@ -32,11 +32,16 @@ class BooksApp extends React.Component {
       BooksAPI.getAll().then((books) => {
         this.setState({ books })
       })
-      
     })
     // console.log(book, event.target.value);
     // console.log(this.state.books);
-}
+  }
+
+  searchBooks(query){
+    BooksAPI.search(query).then((results) => {
+      console.log(results);
+    })
+  }
 
 render() {
   return (
