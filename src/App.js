@@ -9,13 +9,11 @@ import ListBooks from './ListBooks';
 class BooksApp extends React.Component {
 
   constructor(props) {
-    super(props);
-    
+    super(props);  
     this.state = {
       books: [],
       bookShelf: "",
     }
-
     this.moveBookToShelf = this.moveBookToShelf.bind(this);
   }
 

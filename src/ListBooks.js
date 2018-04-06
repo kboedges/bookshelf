@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class ListBooks extends Component {
+  
   static PropTypes = {
     books: PropTypes.array.isRequired,
     bookShelf: PropTypes.string.isRequired,
