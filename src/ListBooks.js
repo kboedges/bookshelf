@@ -10,13 +10,11 @@ class ListBooks extends Component {
 
   render(){
     const { books, bookShelf, changeShelf } = this.props;
-
-    // if (bookShelf === ""){let showingBooks = books;}
-    let showingBooks = books.filter((book) => book.shelf === bookShelf);
+    let showingBooks = [];
 
     return (
       <ol className="books-grid">
-        {showingBooks.map((book) => (
+        {(bookShelf === "" ? books : books.filter((book) => book.shelf === bookShelf)).map((book) => (
           <li key={book.id}>
             <div className="book">
               <div className="book-top">
@@ -35,6 +33,10 @@ class ListBooks extends Component {
               </div>
               <div className="book-title">{book.title}</div>
               <div className="book-authors">{book.authors[0]}</div>
+              
+             
+              
+              
             </div>
           </li>
         ))}
@@ -42,11 +44,5 @@ class ListBooks extends Component {
     )
   }
 }
-
-// ListBooks.propTypes = {
-//     books: PropTypes.array.isRequired,
-//     bookShelf: PropTypes.string.isRequired,
-//     changeShelf: PropTypes.func.isRequired
-// }
 
 export default ListBooks
