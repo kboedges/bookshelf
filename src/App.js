@@ -17,7 +17,6 @@ class BooksApp extends React.Component {
     }
 
     this.moveBookToShelf = this.moveBookToShelf.bind(this);
-    this.handleSearchQuery = this.handleSearchQuery.bind(this);
   }
 
   componentDidMount(){
@@ -35,22 +34,13 @@ class BooksApp extends React.Component {
     // console.log(book, event.target.value, this.state.books);
   }
 
-  handleSearchQuery(event){
-    // console.log(event.target.value);
-    BooksAPI.search(event.target.value).then((results) => {
-      console.log(results);
-    })
-  }
-
 render() {
   return (
     <div className="app">
 
       {/* This brings you to the search page */}
       <Route path="/search" render={() => (
-        <SearchBooks 
-          onSearch={this.handleSearchQuery}
-        />
+        <SearchBooks/>
       )}/>
 
       {/* This brings you to the list of books */}

@@ -8,15 +8,24 @@ you don't find a specific author or title. Every search is limited by search ter
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component {
 
-    static PropTypes = {
-      onSearch: PropTypes.func.isRequired
+    state = {
+      searchResults: []
+    }
+
+    handleSearchQuery(event){
+      // console.log(event.target.value);
+      BooksAPI.search(event.target.value).then((results) => {
+        this.setState({searchResults: results})
+      })
     }
 
   render(){
     const { onSearch } = this.props;
+    const { searchResults } = this.state;
 
     return (
       <div className="search-books">
@@ -27,14 +36,16 @@ class SearchBooks extends Component {
             <input 
               type="text" 
               placeholder="Search by title or author"
-              onChange={(event) => onSearch(event)}
+              onChange={(event) => this.handleSearchQuery(event)}
             />
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
           
-
+          {searchResults.length > 0 && searchResults.map((book) => (
+          <li key={book.id}><div className="book-title">{book.title}</div></li>
+          ))}
             
 
 
