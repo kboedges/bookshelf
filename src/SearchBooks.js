@@ -23,14 +23,25 @@ class SearchBooks extends Component {
   }
 
     handleSearchQuery(event){
-      // console.log(event.target.value);
-      BooksAPI.search(event.target.value).then((results) => {
-        this.setState({searchResults: results})
-      })
-    }
+      console.log(event.target.value);
+      if (event.target.value) {
+        BooksAPI.search(event.target.value).then((results) => {
+          console.log(results);
+          this.setState({searchResults: results})
+        })
+      } else {
+        this.setState({searchResults: []})
+      }
+    } 
 
-    addBook(){
-      console.log("dog")
+    addBook(event, book){
+      console.log(event.target.value, book.title)
+      BooksAPI.update(book, event.target.value).then((response) => {
+        BooksAPI.getAll().then((books) => {
+          this.setState({ books })
+          console.log(books);
+        })
+      })
     }
 
   render(){
@@ -56,12 +67,16 @@ class SearchBooks extends Component {
               <div className="book-title">{book.title}</div>
             </li>
           ))} */}
-          
-          <ListBooks 
-            books={searchResults} 
-            bookShelf=""
-            changeShelf={this.addBook}
-          />
+
+          {searchResults.length > 0 && 
+            (
+              <ListBooks 
+                books={searchResults} 
+                bookShelf=""
+                changeShelf={this.addBook}
+              />
+           )
+          }
 
           </ol>
         </div>

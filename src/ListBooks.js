@@ -12,7 +12,6 @@ class ListBooks extends Component {
 
   render(){
     const { books, bookShelf, changeShelf } = this.props;
-    let showingBooks = [];
 
     return (
       <ol className="books-grid">
@@ -28,7 +27,7 @@ class ListBooks extends Component {
                   }}>
                 </div>
                 <div className="book-shelf-changer">
-                  <select defaultValue={book.shelf} onChange={(event) => changeShelf(event, book)}>
+                  <select defaultValue={(book.shelf) ? book.shelf : "none"} onChange={(event) => changeShelf(event, book)}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
