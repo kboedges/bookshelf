@@ -64,7 +64,7 @@ class SearchBooks extends Component {
                   bookShelf=""
                   changeShelf={this.addBook}
                 />
-            )
+              )
             }
           </ol>
         </div>
