@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-import ListBooks from './ListBooks';
+import ListBooks from './ListBooks'
+import PropTypes from 'prop-types'
 
 class SearchBooks extends Component {
 
   constructor(props) {
     super(props);
-    
     this.state = {
       searchResults: []
     }
-
     this.addBook = this.addBook.bind(this);
+  }
+
+  static PropTypes = {
+    addBookFromSearch: PropTypes.func.isRequired
   }
 
     handleSearchQuery(event){
@@ -30,10 +33,7 @@ class SearchBooks extends Component {
     addBook(event, book){
       console.log(event.target.value, book.title)
       BooksAPI.update(book, event.target.value).then((response) => {
-        BooksAPI.getAll().then((books) => {
-          this.setState({ books })
-          console.log(books);
-        })
+        this.props.addBookFromSearch();
       })
     }
 

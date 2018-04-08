@@ -15,6 +15,7 @@ class BooksApp extends React.Component {
       bookShelf: "",
     }
     this.moveBookToShelf = this.moveBookToShelf.bind(this);
+    this.updateBooks = this.updateBooks.bind(this);
   }
 
   updateBooks(){
@@ -31,7 +32,6 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, event.target.value).then((response) => {
       this.updateBooks();
     })
-    // console.log(book, event.target.value, this.state.books);
   }
 
 render() {
@@ -40,7 +40,9 @@ render() {
 
       {/* This brings you to the search page */}
       <Route path="/search" render={() => (
-        <SearchBooks/>
+        <SearchBooks
+          addBookFromSearch={this.updateBooks}
+        />
       )}/>
 
       {/* This brings you to the list of books */}
