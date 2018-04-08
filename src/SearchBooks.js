@@ -15,27 +15,23 @@ class SearchBooks extends Component {
   }
 
   static PropTypes = {
-    addBookFromSearch: PropTypes.func.isRequired
+    addBookFromSearch: PropTypes.func.isRequired,
   }
 
-    handleSearchQuery(event){
-      console.log(event.target.value);
-      if (event.target.value) {
-        BooksAPI.search(event.target.value).then((results) => {
-          console.log(results);
-          this.setState({searchResults: results})
-        })
-      } else {
-        this.setState({searchResults: []})
-      }
-    } 
-
-    addBook(event, book){
-      console.log(event.target.value, book.title)
-      BooksAPI.update(book, event.target.value).then((response) => {
-        this.props.addBookFromSearch();
+  handleSearchQuery(event){
+    if (event.target.value) {
+      BooksAPI.search(event.target.value).then((results) => {
+        this.setState({searchResults: results})
       })
+    } else {
+      this.setState({searchResults: []})
     }
+  } 
+
+  addBook(event, book){
+    this.props.addBookFromSearch(event, book);
+    console.log(event.target.value, book)
+  }
 
   render(){
     const { searchResults } = this.state;
@@ -54,32 +50,20 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          
-          {/* {searchResults.length > 0 && searchResults.map((book) => (
-            <li key={book.id}> 
-              <div className="book-title">{book.title}</div>
-            </li>
-          ))} */}
-
-          {searchResults.length > 0 && 
-            (
-              <ListBooks 
-                books={searchResults} 
-                bookShelf=""
-                changeShelf={this.addBook}
-              />
-           )
-          }
-
+            {searchResults.length > 0 && 
+              (
+                <ListBooks 
+                  books={searchResults} 
+                  bookShelf=""
+                  changeShelf={this.addBook}
+                />
+            )
+            }
           </ol>
         </div>
       </div>
     )
   }
 }
-
-// SearchBooks.propTypes = {
-//   onSearch: PropTypes.func.isRequired
-// }
 
 export default SearchBooks
