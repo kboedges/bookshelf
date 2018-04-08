@@ -7,11 +7,11 @@ import PropTypes from 'prop-types'
 class SearchBooks extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       searchResults: []
     }
-    this.addBook = this.addBook.bind(this);
+    this.addBook = this.addBook.bind(this)
   }
 
   static PropTypes = {
@@ -21,7 +21,15 @@ class SearchBooks extends Component {
   handleSearchQuery(event){
     if (event.target.value) {
       BooksAPI.search(event.target.value).then((results) => {
-        this.setState({searchResults: results})
+        BooksAPI.getAll().then((shelvedBooks) => {
+          results.forEach((result) => {
+            let matchingBook = shelvedBooks.filter(book => book.id === result.id)
+            if (matchingBook[0]){
+              result.shelf = matchingBook[0].shelf
+            }
+          })
+          this.setState({searchResults: results})
+        })   
       })
     } else {
       this.setState({searchResults: []})
@@ -29,12 +37,11 @@ class SearchBooks extends Component {
   } 
 
   addBook(event, book){
-    this.props.addBookFromSearch(event, book);
-    console.log(event.target.value, book)
+    this.props.addBookFromSearch(event, book)
   }
 
   render(){
-    const { searchResults } = this.state;
+    const { searchResults } = this.state
 
     return (
       <div className="search-books">

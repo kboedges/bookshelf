@@ -11,7 +11,7 @@ class ListBooks extends Component {
   }
 
   render(){
-    const { books, bookShelf, changeShelf } = this.props;
+    const { books, bookShelf, changeShelf } = this.props
 
     return (
       <ol className="books-grid">

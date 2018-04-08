@@ -9,13 +9,13 @@ import ListBooks from './ListBooks';
 class BooksApp extends Component {
 
   constructor(props) {
-    super(props);  
+    super(props) 
     this.state = {
       books: [],
       bookShelf: "",
     }
-    this.moveBookToShelf = this.moveBookToShelf.bind(this);
-    this.updateBooks = this.updateBooks.bind(this);
+    this.moveBookToShelf = this.moveBookToShelf.bind(this)
+    this.updateBooks = this.updateBooks.bind(this)
   }
 
   updateBooks(){
@@ -25,12 +25,12 @@ class BooksApp extends Component {
   }
 
   componentDidMount(){
-    this.updateBooks();
+    this.updateBooks()
   }
 
   moveBookToShelf(event, book){ 
     BooksAPI.update(book, event.target.value).then((response) => {
-      this.updateBooks();
+      this.updateBooks()
     })
   }
 
