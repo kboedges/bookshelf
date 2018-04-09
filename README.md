@@ -6,7 +6,7 @@ Of course, you are free to start this project from scratch if you wish! Just be 
 
 ## TL;DR
 
-To get started developing right away:
+To run the Bookshelf app:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`

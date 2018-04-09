@@ -49,7 +49,7 @@ class BooksApp extends Component {
         <Route exact path="/" render={() => (
           <div className="list-books">
             <div className="list-books-title">
-              <h1>MyReads</h1>
+              <h1>Bookshelf</h1>
             </div>
             <div className="list-books-content">
               <div>
