@@ -1,15 +1,18 @@
 # Bookshelf Project
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. 
+Bookshelf is a simple app that allows the user to track books in three categories: _currently reading_, _read_, and _want to read_. Books that aren't being tracked are classified into _none_. Books can be added to these categories from the Search page and removed from the categories by changing to _none_. The search results are limited based on the provided search terms [see Important below].
 
 ## Quickstart
 
 To start using the Bookshelf app:
 
-* `git clone https://github.com/kboedges/bookshelf.git`
-* `cd bookshelf`
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+1. Clone the GitHub repository
+```
+$ git clone https://github.com/kboedges/bookshelf.git
+$ cd bookshelf
+```
+2. Install all project dependencies with `npm install`
+3. Start the development server with `npm start`
 
 ## Structure
 ```bash
