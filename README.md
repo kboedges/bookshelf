@@ -1,6 +1,6 @@
 # Bookshelf Project
 
-Bookshelf is a simple app that allows the user to track books in three categories: _currently reading_, _read_, and _want to read_. Books that aren't being tracked are classified into _none_. Books can be added to these categories from the Search page and removed from the categories by changing to _none_. The search results are limited based on the provided search terms [see Important below].
+Bookshelf is a simple app that allows the user to track books in three categories ('shelves'): _currently reading_, _read_, and _want to read_. Books that aren't being tracked are classified into _none_. Books can be added to these shelves from the Search page and removed from all of the shelves by changing the shelf to _none_. The search results are limited based on the provided search terms [see Important below].
 
 ## Quickstart
 
