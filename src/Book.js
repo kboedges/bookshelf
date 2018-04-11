@@ -11,6 +11,7 @@ class Book extends Component {
     
         return (
           <div>dog</div>
+          // Figure out to to pass props THROUGH another component
         )
       }
     }

@@ -28,6 +28,7 @@ $ cd bookshelf
     ├── App.js # This is the root of your app. Contains static HTML right now.
     ├── ListBooks.js # This component lists out the books for each bookshelf and for the search apge.
     ├── SearchBooks.js # This component displays the search page and handles search queries.
+    ├── Book.js # This component displays book information.
     ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
     ├── noimage.png # This image is used in ListBooks.js when a book image is unavailable.
     ├── icons # Helpful images for your app. Use at your discretion.
