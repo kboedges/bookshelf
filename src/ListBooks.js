@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import noimage from './noimage.png'
+import Book from './Book';
 
 class ListBooks extends Component {
   
@@ -17,6 +18,10 @@ class ListBooks extends Component {
       <ol className="books-grid">
         {(bookShelf === "" ? books : books.filter((book) => book.shelf === bookShelf)).map((book) => (
           <li key={book.id}>
+            <Book 
+              book={book} 
+              changeShelf={changeShelf}
+            />
             <div className="book">
               <div className="book-top">
                 <div className="book-cover" 
