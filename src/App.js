@@ -12,7 +12,8 @@ class BooksApp extends Component {
     super(props) 
     this.state = {
       books: [],
-      bookShelf: "",
+      shelf: "",
+      title: ""
     }
     this.moveBookToShelf = this.moveBookToShelf.bind(this)
     this.updateBooks = this.updateBooks.bind(this)
@@ -35,6 +36,14 @@ class BooksApp extends Component {
   }
 
   render() {
+
+    const shelves = {
+      currentlyReading: ['Currently Reading', 'currentlyReading'],
+      wantToRead: ['Want to Read', 'wantToRead'],
+      read: ['Read', 'read']
+    }
+
+
     return (
       <div className="app">
 
@@ -53,36 +62,27 @@ class BooksApp extends Component {
             </div>
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                    <div className="bookshelf-books">
-                      <ListBooks 
-                        books={this.state.books} 
-                        bookShelf="currentlyReading"
-                        changeShelf={this.moveBookToShelf}
-                      />
-                    </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                    <div className="bookshelf-books">
-                      <ListBooks 
-                        books={this.state.books} 
-                        bookShelf="wantToRead"
-                        changeShelf={this.moveBookToShelf}
-                      />
-                    </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                    <div className="bookshelf-books">
-                      <ListBooks 
-                        books={this.state.books} 
-                        bookShelf="read"
-                        changeShelf={this.moveBookToShelf}
-                      />
-                    </div>
-                </div>
+                <ListBooks 
+                  books={this.state.books} 
+                  shelf={shelves.currentlyReading[1]}
+                  title={shelves.currentlyReading[0]}
+                  bookShelf="currentlyReading"
+                  changeShelf={this.moveBookToShelf}
+                />
+                <ListBooks 
+                  books={this.state.books} 
+                  shelf={shelves.wantToRead[1]}
+                  title={shelves.wantToRead[0]}
+                  bookShelf="wantToRead"
+                  changeShelf={this.moveBookToShelf}
+                />
+                <ListBooks 
+                  books={this.state.books} 
+                  shelf={shelves.read[1]}
+                  title={shelves.read[0]}
+                  bookShelf="read"
+                  changeShelf={this.moveBookToShelf}
+                /> 
               </div>
             </div>
             <div className="open-search">

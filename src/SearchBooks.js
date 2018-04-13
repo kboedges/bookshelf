@@ -57,13 +57,15 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {searchResults.length > 0 && 
+            {searchResults.length > 0 ?
               (
                 <ListBooks 
                   books={searchResults} 
                   bookShelf=""
                   changeShelf={this.addBook}
                 />
+              ) : (
+                "Search results not found."
               )
             }
           </ol>
