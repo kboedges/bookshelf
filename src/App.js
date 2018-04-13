@@ -43,7 +43,6 @@ class BooksApp extends Component {
       read: ['Read', 'read']
     }
 
-
     return (
       <div className="app">
 
@@ -66,21 +65,18 @@ class BooksApp extends Component {
                   books={this.state.books} 
                   shelf={shelves.currentlyReading[1]}
                   title={shelves.currentlyReading[0]}
-                  bookShelf="currentlyReading"
                   changeShelf={this.moveBookToShelf}
                 />
                 <ListBooks 
                   books={this.state.books} 
                   shelf={shelves.wantToRead[1]}
                   title={shelves.wantToRead[0]}
-                  bookShelf="wantToRead"
                   changeShelf={this.moveBookToShelf}
                 />
                 <ListBooks 
                   books={this.state.books} 
                   shelf={shelves.read[1]}
                   title={shelves.read[0]}
-                  bookShelf="read"
                   changeShelf={this.moveBookToShelf}
                 /> 
               </div>
