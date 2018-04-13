@@ -10,7 +10,8 @@ class SearchBooks extends Component {
     super(props)
     this.state = {
       searchResults: [],
-      query: ""
+      query: "",
+      errorMessage: false
     }
     this.addBook = this.addBook.bind(this)
   }
@@ -21,22 +22,35 @@ class SearchBooks extends Component {
   }
 
   handleSearchQuery(event){
-    this.setState({query: event.target.value})
+    this.setState({query: event.target.value}, function() {
+      console.log('done', this.state.query);
+    
+    
+    
     
     if (this.state.query) {
       BooksAPI.search(this.state.query).then((results) => {
+          console.log(this.state.query, results)
+        
+        if (results.error) {
+          this.setState({ searchResults:[] })
+          this.setState({ errorMessage: true })
+        } else {
           results.forEach((result) => {
             let matchingBook = this.props.shelvedBooks.filter(book => book.id === result.id)
-            
             if (matchingBook[0]){
               result.shelf = matchingBook[0].shelf
             }
+          }) 
           this.setState({searchResults: results})
-        })   
+          this.setState({ errorMessage: false })
+        }
       })
     } else {
       this.setState({searchResults: []})
+      this.setState({ errorMessage: false })
     }
+  })
   } 
 
   addBook(event, book){
@@ -61,15 +75,15 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {searchResults.length > 0 ?
+            {this.state.errorMessage === true ?
               (
+                "Search results not found." 
+              ) : (
                 <ListBooks 
                   books={searchResults} 
                   bookShelf=""
                   changeShelf={this.addBook}
                 />
-              ) : (
-                "Search results not found."
               )
             }
           </ol>
