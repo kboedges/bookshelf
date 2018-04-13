@@ -9,25 +9,28 @@ class SearchBooks extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchResults: []
+      searchResults: [],
+      query: ""
     }
     this.addBook = this.addBook.bind(this)
   }
 
   static PropTypes = {
     addBookFromSearch: PropTypes.func.isRequired,
+    shelvedBooks: PropTypes.array.isRequired
   }
 
   handleSearchQuery(event){
-    if (event.target.value) {
-      BooksAPI.search(event.target.value).then((results) => {
-        BooksAPI.getAll().then((shelvedBooks) => {
+    this.setState({query: event.target.value})
+    
+    if (this.state.query) {
+      BooksAPI.search(this.state.query).then((results) => {
           results.forEach((result) => {
-            let matchingBook = shelvedBooks.filter(book => book.id === result.id)
+            let matchingBook = this.props.shelvedBooks.filter(book => book.id === result.id)
+            
             if (matchingBook[0]){
               result.shelf = matchingBook[0].shelf
             }
-          })
           this.setState({searchResults: results})
         })   
       })
@@ -51,7 +54,8 @@ class SearchBooks extends Component {
             <input 
               type="text" 
               placeholder="Search by title or author"
-              onChange={(event) => this.handleSearchQuery(event)}
+              value={this.state.query}
+              onChange={this.handleSearchQuery.bind(this)}
             />
           </div>
         </div>

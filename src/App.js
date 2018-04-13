@@ -13,16 +13,11 @@ class BooksApp extends Component {
     this.state = {
       books: [],
       shelf: "",
-      title: ""
+      title: "",
+      // newShelf: ""
     }
     this.moveBookToShelf = this.moveBookToShelf.bind(this)
     this.updateBooks = this.updateBooks.bind(this)
-  }
-
-  updateBooks(){
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-    })
   }
 
   componentDidMount(){
@@ -30,8 +25,16 @@ class BooksApp extends Component {
   }
 
   moveBookToShelf(event, book){ 
+    // this.setState({ newShelf: event.target.value })
     BooksAPI.update(book, event.target.value).then((response) => {
+      // console.log(response, this.state.newShelf, book)
       this.updateBooks()
+    })
+  }
+
+  updateBooks(){
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
     })
   }
 
@@ -50,6 +53,7 @@ class BooksApp extends Component {
         <Route path="/search" render={() => (
           <SearchBooks
             addBookFromSearch={this.moveBookToShelf}
+            shelvedBooks={this.state.books}
           />
         )}/>
 
