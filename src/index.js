@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import BooksApp from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <BrowserRouter><BooksApp /></BrowserRouter>,
+  <BrowserRouter>
+    <BooksApp />
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
